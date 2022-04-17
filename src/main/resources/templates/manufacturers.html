@@ -1,0 +1,40 @@
+<!DOCTYPE HTML>
+
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layouts/layout}">
+<head>
+
+</head>
+<body>
+	<th:block layout:fragment="content">
+<a class="btn btn-primary" th:href="@{/users/create}"> add manufacturer</a> <br>
+		<div class="row">
+			
+			<div class="header col-md-12">
+				<h3>Clients</h3>
+				<hr>
+				<table class="table table-bordered table-striped">
+					<thead class="thead-dark">
+						<tr>
+							<th>First Name</th>
+							<th>Last Name</th>
+							<th>Email</th>
+							<th>Action</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="user : ${users}">
+							<td th:text="${user.firstName}" />
+							<td th:text="${user.lastName}" />
+							<td th:text="${user.email}" />
+							<td><a th:href="@{/users/showFormForUpdate(id=${user.id})}" class="btn btn-info btn-sm"> Update </a> <a
+								th:href="@{/users/delete(id=${user.id})}" class="btn btn-danger btn-sm"
+								onclick="if (!(confirm('Are you sure you want to delete this customer?'))) return false"> Delete </a></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</th:block>
+</body>
+</html>

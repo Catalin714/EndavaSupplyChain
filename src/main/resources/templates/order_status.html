@@ -1,0 +1,70 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layouts/layout}">
+<head>
+</head>
+<body>
+	<th:block layout:fragment="content">
+		<div class="row ">
+			<div class="col">
+				<div class="wrapper">
+					<div class="table-responsive">
+					<h3>Order</h3>
+						<table class="table activitites">
+							<thead>
+								<tr>
+									<th scope="col" class=" header">items</th>
+									<th scope="col" class="">Quantity</th>
+									<th scope="col" class="">price each</th>
+									<th scope="col" class="">total</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr th:each="item: ${order.orderItems}">
+									<td th:text="${item.product.title}" />
+									<td><span th:text="${item.quantity}"></span>
+									</td>
+									<td th:text="${item.product.price +'$'}" />
+									<td th:text="${(item.product.price * item.quantity) +'$'}" />
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			
+				<div class="d-flex justify-content-between">
+					<div class="text-muted">
+						<button class="btn" type="button" data-toggle="collapse" data-target="#table" aria-expanded="false"></button>
+					</div>
+					<div class="d-flex flex-column justify-content-end align-items-end">
+						<div class="d-flex px-3 pr-md-5 py-1 subtotal">
+							<div class="px-4">Subtotal</div>
+							<div class="h5 font-weight-bold px-md-2">
+								$<span th:text="${total}"></span>
+							</div>
+							<br>
+							
+						</div>
+						<!-- <a th:href="@{'/users/validate/'}" class="btn btn-primary"> Save this order</a> -->
+					</div>
+				</div>
+				<form method="Post" th:action="@{/orders/change-status}" th:object="${order}" >
+					    <input type="hidden" value="${id}" th:field="*{id}">
+						<div class="col-md-8">
+							<label for="role" class="form-label">Change Status</label> <select th:field="*{status}"
+								th:class="${#fields.hasErrors('status')}? 'form-select is-invalid':'form-select'"   >
+								<option value="">...</option>
+								<option th:each="status: ${statusList}" th:value="${status}" th:text="${status.name}"></option>
+							</select>
+							<div th:if="${#fields.hasErrors('address')}" id="typeError" class="invalid-feedback"><span th:text="${address}"></span></div>
+						</div>
+						<br>
+						<button type="submit" class="btn btn-primary">Save this order</button>
+					</form>
+			</div>
+	
+		</div>
+				
+	</th:block>
+</body>
+</html>

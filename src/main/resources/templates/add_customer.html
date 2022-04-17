@@ -1,0 +1,42 @@
+<!DOCTYPE HTML>
+
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layouts/layout}">
+<head>
+
+</head>
+<body>
+	<th:block layout:fragment="content">
+		<div class="row ">
+			<div class="col-md-12">
+				<div class="card card-primary">
+					<div class="card-heading">
+						<h3 align="center">
+							<i class="fa fa-product-hunt"></i> Insert customer
+						</h3>
+					</div>
+					<div class="card-body  ">
+						<form action="#" th:action="@{'/customers/create'}" th:object="${customer}" method="POST">
+							<input type="hidden" th:field="*{id}" />
+							<div class="col-md-8">
+								<label for="st" class="form-label">Name</label> <input
+									th:class="${#fields.hasErrors('name')} ? 'form-control is-invalid' : 'form-control'  " type="text" id="st"
+									th:value="${name}" th:field="*{name}">
+								<div th:if="${#fields.hasErrors('name')}" id="stError" class="invalid-feedback">
+									<span th:errors="*{name}"></span>
+								</div>
+							</div>
+							<br />
+							<div class="col-md-4">
+								<button class="btn btn-primary" type="submit">Save</button>
+								<button class="btn btn-warning" type="button" onclick="window.history.back()">Back</button>
+							</div>
+						</form>
+
+					</div>
+				</div>
+			</div>
+		</div>
+	</th:block>
+</body>
+</html>

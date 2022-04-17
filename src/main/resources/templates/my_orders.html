@@ -1,0 +1,43 @@
+<!DOCTYPE HTML>
+
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layouts/layout}">
+<head>
+
+</head>
+<body>
+	<th:block layout:fragment="content">
+		<div class="row">
+
+			<div class="header col-md-12">
+				<h3> Orders</h3>
+				<hr>
+				<table class="table table-bordered table-striped">
+					<thead class="thead-dark">
+						<tr>
+							<th>Order date</th>
+							<th>Products</th>
+							<th>Address</th>
+							<th>Status</th>
+							<th>Action</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="order : ${orders}">
+							<td th:text="${order.createdAt}" />
+							<td th:text="${#lists.size(order.orderItems)}" />
+							<td th:text="${order.status}"/>
+							<td th:text="${order?.address?.street +' '+ order?.address?.city}" />
+							<td>
+						<!-- 	<a th:href="@{'/addresses/update/'+${order.id}}" class="btn btn-info btn-sm"> Update </a> -->
+							 <a
+								th:href="@{'/orders/cancel/'+${order.id}}" class="btn btn-danger btn-sm"
+								onclick="if (!(confirm('Are you sure you want to cancel this order?'))) return false"> cancel </a></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</th:block>
+</body>
+</html>

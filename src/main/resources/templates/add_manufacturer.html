@@ -1,0 +1,71 @@
+<!DOCTYPE HTML>
+
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layouts/layout}">
+<head>
+
+</head>
+<body>
+	<th:block layout:fragment="content">
+		<div class="row ">
+			<div class="col-md-12">
+				<div class="card card-primary">
+					<div class="card-heading">
+						<h3 align="center">
+							<i class="fa fa-product-hunt"></i> Insert Client
+						</h3>
+					</div>
+					<div class="card-body  ">
+						<form action="#" th:action="@{'/users/create'}" th:object="${user}" method="POST">
+							<input type="hidden" th:field="*{id}" />
+							<div class="col-md-8">
+								<label for="fn" class="form-label">First name</label> <input
+									th:class="${#fields.hasErrors('firstName')} ? 'form-control is-invalid' : 'form-control'  " type="text" id="fn"
+									th:value="${firstName}" th:field="*{firstName}">
+								<div th:if="${#fields.hasErrors('firstName')}" id="fnError" class="invalid-feedback">
+									<span th:errors="*{firstName}"></span>
+								</div>
+							</div>
+
+							<div class="col-md-8">
+								<label for="ln" class="form-label">Last name</label> <input
+									th:class="${#fields.hasErrors('lastName')} ? 'form-control is-invalid' : 'form-control'  " type="text" id="ln"
+									th:value="${lastName}" th:field="*{lastName}">
+								<div th:if="${#fields.hasErrors('lastName')}" id="lnError" class="invalid-feedback">
+									<span th:errors="*{lastName}"></span>
+								</div>
+							</div>
+
+							<div class="col-md-8">
+								<label for="em" class="form-label">Email</label> <input
+									th:class="${#fields.hasErrors('email')} ? 'form-control is-invalid' : 'form-control'  " type="email" id="em"
+									th:value="${email}" th:field="*{email}">
+								<div th:if="${#fields.hasErrors('email')}" id="emError" class="invalid-feedback">
+									<span th:errors="*{email}"></span>
+								</div>
+							</div>
+
+							<div class="col-md-8">
+								<label for="em" class="form-label">Password</label> <input
+									th:class="${#fields.hasErrors('password')} ? 'form-control is-invalid' : 'form-control'  " type="password"
+									id="em" th:value="${password}" th:field="*{password}">
+								<div th:if="${#fields.hasErrors('password')}" id="emError" class="invalid-feedback">
+									<span th:errors="*{password}"></span>
+								</div>
+							</div>
+							<br />
+							<div class="col-md-4">
+								<button class="btn btn-primary" type="submit">Save</button>
+								<button class="btn btn-warning" type="button" onclick="window.history.back()">Back</button>
+							</div>
+							<!-- <button type="submit" class="btn btn-info col-2">Save</button> -->
+						</form>
+
+					</div>
+					<div class="panel-footer"></div>
+				</div>
+			</div>
+		</div>
+	</th:block>
+</body>
+</html>

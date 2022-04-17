@@ -1,0 +1,53 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layouts/layout}">
+<head>
+</head>
+<body>
+	<th:block layout:fragment="content">
+		<div class="row ">
+			<div class="col">
+				<div class="wrapper">
+					<div class="table-responsive">
+						<table class="table activitites">
+							<thead>
+								<tr>
+									<th scope="col" class="text-uppercase header">item</th>
+									<th scope="col" class="text-uppercase">Quantity</th>
+									<th scope="col" class="text-uppercase">price each</th>
+									<th scope="col" class="text-uppercase">total</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr th:each="item: ${session?.cart?.orderItems}">
+									<td th:text="${item.product.title}" />
+									<td><span th:text="${item.quantity}"></span></td>
+									<td th:text="${item.product.price +'$'}" />
+									<td th:text="${(item.product.price * item.quantity) +'$'}" />
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+				<div class="row">
+					<form method="Post" th:action="@{/save-order-address}" th:object="${order}">
+					    <input type="hidden" value="${id}">
+						<div class="col-md-8">
+							<label for="role" class="form-label">Address</label> <select multiple="multiple"
+								th:class="${#fields.hasErrors('address')}? 'form-select is-invalid':'form-select'" th:field="*{address.id}" >
+								<option value="">...</option>
+								<option th:each="address: ${addresses}" th:value="${address.id}" th:text="${address.street + ' ' +address.city + ' '+ address.country}"></option>
+							</select>
+							<div th:if="${#fields.hasErrors('address')}" id="typeError" class="invalid-feedback"></div>
+						</div>
+						<button type="submit">Save</button>
+					</form>
+				</div>
+				
+			</div>
+
+		</div>
+
+	</th:block>
+</body>
+</html>

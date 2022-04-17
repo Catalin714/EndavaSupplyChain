@@ -1,0 +1,70 @@
+<!DOCTYPE HTML>
+
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layouts/layout}">
+<head>
+
+</head>
+<body>
+	<th:block layout:fragment="content">
+		<div class="row ">
+			<div class="col-md-12">
+				<div class="card card-primary">
+					<div class="card-heading">
+						<h3 align="center">
+							<i class="fa fa-product-hunt"></i> Insert address
+						</h3>
+					</div>
+					<div class="card-body  ">
+						<form action="#" th:action="@{'/addresses/create'}" th:object="${address}" method="POST">
+							<input type="hidden" th:field="*{id}" />
+							<div class="col-md-8">
+								<label for="st" class="form-label">Street</label> <input
+									th:class="${#fields.hasErrors('street')} ? 'form-control is-invalid' : 'form-control'  " type="text" id="st"
+									th:value="${street}" th:field="*{street}">
+								<div th:if="${#fields.hasErrors('street')}" id="stError" class="invalid-feedback">
+									<span th:errors="*{street}"></span>
+								</div>
+							</div>
+
+							<div class="col-md-8">
+								<label for="ct" class="form-label">City</label> <input
+									th:class="${#fields.hasErrors('city')} ? 'form-control is-invalid' : 'form-control'  " type="text" id="ct"
+									th:value="${city}" th:field="*{city}">
+								<div th:if="${#fields.hasErrors('city')}" id="ctError" class="invalid-feedback">
+									<span th:errors="*{city}"></span>
+								</div>
+							</div>
+
+							<div class="col-md-8">
+								<label for="ct" class="form-label">PhoneNumber</label> <input
+									th:class="${#fields.hasErrors('phoneNumber')} ? 'form-control is-invalid' : 'form-control'  "
+									type="text" id="em" th:value="${phoneNumber}" th:field="*{phoneNumber}">
+								<div th:if="${#fields.hasErrors('phoneNumber')}" id="ctError" class="invalid-feedback">
+									<span th:errors="*{phoneNumber}"></span>
+								</div>
+							</div>
+
+							<div class="col-md-8">
+								<label for="cr" class="form-label">Country</label> <input
+									th:class="${#fields.hasErrors('country')} ? 'form-control is-invalid' : 'form-control'  " type="text" id="cr"
+									th:value="${country}" th:field="*{country}">
+								<div th:if="${#fields.hasErrors('country')}" id="crError" class="invalid-feedback">
+									<span th:errors="*{country}"></span>
+								</div>
+							</div>
+
+							<br />
+							<div class="col-md-4">
+								<button class="btn btn-primary" type="submit">Save</button>
+								<button class="btn btn-warning" type="button" onclick="window.history.back()">Back</button>
+							</div>
+						</form>
+
+					</div>
+				</div>
+			</div>
+		</div>
+	</th:block>
+</body>
+</html>

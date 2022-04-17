@@ -1,0 +1,26 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layouts/layout}" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+</head>
+<body>
+	<th:block layout:fragment="content">
+		<div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3" >
+			<div class="col" th:each="product: ${products}">
+				<div class="card shadow-sm">
+					<img th:src="${product.image}" />
+					<div class="card-body">
+						<p class="card-text" th:text="${product.title}"></p>
+						<div class="d-flex justify-content-between align-items-center">
+							<div class="btn-group">
+								<a sec:authorize="hasAnyRole('ROLE_CLIENT')" type="button" class="btn btn-sm btn-outline-secondary" th:href="@{'/users/addToCart/'+ ${product.id}}">Add to cart</a>
+							</div>
+							<small class="text-muted" th:text="${product.price}"></small>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</th:block>
+</body>
+</html>

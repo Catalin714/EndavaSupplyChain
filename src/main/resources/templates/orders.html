@@ -1,0 +1,44 @@
+<!DOCTYPE HTML>
+
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layouts/layout}">
+<head>
+
+</head>
+<body>
+	<th:block layout:fragment="content">
+		<br>
+		<div class="row">
+
+			<div class="header col-md-12">
+				<h3> Orders</h3>
+				<hr>
+				<table class="table table-bordered table-striped">
+					<thead class="thead-dark">
+						<tr>
+							<th>Order date</th>
+							<th>Products</th>
+							<th>Address</th>
+							<th>Status</th>
+							<th> Affected to</th>
+							<th>Action</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="order : ${orders}">
+							<td th:text="${order.createdAt}" />
+							<td th:text="${#lists.size(order?.orderItems)}" />
+							<td th:text="${order?.address?.street +' '+ order?.address?.city}" />
+							<td th:text="${order.status}"/>
+							<td th:text="${order?.manufacturer?.firstName + ' '+order?.manufacturer?.lastName }"/>
+							<td>
+							 <a
+								th:href="@{'orders/change-status/'+${order.id}}" class="btn btn-success btn-sm"> change status </a></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</th:block>
+</body>
+</html>

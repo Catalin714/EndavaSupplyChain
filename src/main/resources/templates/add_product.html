@@ -1,0 +1,79 @@
+<!DOCTYPE HTML>
+
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layouts/layout}">
+<head>
+
+</head>
+<body>
+	<th:block layout:fragment="content">
+		<div class="row ">
+			<div class="col-md-12">
+				<div class="card card-primary">
+					<div class="card-heading">
+						<h3 align="center">
+							<i class="fa fa-product-hunt"></i> Insert product
+						</h3>
+					</div>
+					<div class="card-body  ">
+						<form action="#" th:action="@{'/products/create'}" th:object="${product}" method="POST">
+							<input type="hidden" th:field="*{id}" />
+							<div class="col-md-8">
+								<label for="st" class="form-label">Title</label> <input
+									th:class="${#fields.hasErrors('title')} ? 'form-control is-invalid' : 'form-control'  " type="text" id="st"
+									th:value="${title}" th:field="*{title}">
+								<div th:if="${#fields.hasErrors('title')}" id="stError" class="invalid-feedback">
+									<span th:errors="*{title}"></span>
+								</div>
+							</div>
+
+							<div class="col-md-8">
+								<label for="ct" class="form-label">Image</label> <input
+									th:class="${#fields.hasErrors('image')} ? 'form-control is-invalid' : 'form-control'  " type="text" id="ct"
+									th:value="${image}" th:field="*{image}">
+								<div th:if="${#fields.hasErrors('image')}" id="ctError" class="invalid-feedback">
+									<span th:errors="*{image}"></span>
+								</div>
+							</div>
+
+							<div class="col-md-8">
+								<label for="ct" class="form-label">Quantity</label> <input
+									th:class="${#fields.hasErrors('quantity')} ? 'form-control is-invalid' : 'form-control'  "
+									type="text" id="em" th:value="${quantity}" th:field="*{quantity}">
+								<div th:if="${#fields.hasErrors('quantity')}" id="ctError" class="invalid-feedback">
+									<span th:errors="*{quantity}"></span>
+								</div>
+							</div>
+
+							<div class="col-md-8">
+								<label for="cr" class="form-label">Price</label> <input
+									th:class="${#fields.hasErrors('price')} ? 'form-control is-invalid' : 'form-control'  " type="text" id="cr"
+									th:value="${price}" th:field="*{price}">
+								<div th:if="${#fields.hasErrors('price')}" id="crError" class="invalid-feedback">
+									<span th:errors="*{price}"></span>
+								</div>
+							</div>
+							
+							 <div class="col-md-8">
+								<label for="role" class="form-label">Customer</label> <select 
+									th:class="${#fields.hasErrors('customer')}? 'form-select is-invalid':'form-select'" th:field="*{customer.id}" id="role">
+									<option value="">...</option>
+									<option th:each="customer: ${customers}" th:value="${customer.id}" th:text="${customer.name}"></option>
+								</select>
+								<div th:if="${#fields.hasErrors('customer')}" id="typeError" class="invalid-feedback"></div>
+							</div> 
+
+							<br />
+							<div class="col-md-4">
+								<button class="btn btn-primary" type="submit">Save</button>
+								<button class="btn btn-warning" type="button" onclick="window.history.back()">Back</button>
+							</div>
+						</form>
+
+					</div>
+				</div>
+			</div>
+		</div>
+	</th:block>
+</body>
+</html>
